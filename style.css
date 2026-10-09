@@ -1,0 +1,101 @@
+/* ===== Gaya situs Pak Peri =====
+   Warna utama bisa diganti di bagian :root di bawah ini. */
+:root{
+  --g1:#0f4c3a;   /* hijau tua */
+  --g2:#1f7a5c;   /* hijau sedang */
+  --gold:#f2b632; /* emas */
+  --soft:#eef7f2; /* hijau sangat muda */
+  --ink:#1d2b26;  /* warna teks */
+  --mute:#5d6f68; /* teks abu */
+  --line:#dcebe3; /* garis tepi */
+  --bg:#f6fbf8;   /* latar halaman */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:var(--g2)}
+img{max-width:100%}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+
+/* Header & menu */
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.brand{font-weight:800;color:var(--g1);text-decoration:none;font-size:17px;line-height:1.2}
+.brand small{display:block;font-weight:500;font-size:11px;color:var(--mute)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{padding:7px 12px;border-radius:9px;text-decoration:none;color:var(--ink);font-size:14px;font-weight:600}
+nav a:hover{background:var(--soft)}
+nav a[aria-current="page"]{background:var(--g1);color:#fff}
+
+/* Bagian sambutan */
+.hero{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;padding:36px 0 30px}
+.hero h1{margin:0 0 10px;font-size:clamp(26px,6vw,40px);line-height:1.2}
+.hero h1 span{color:var(--gold)}
+.hero p{margin:0 0 18px;color:#d9efe6;font-size:16px;max-width:640px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.btn{display:inline-block;background:var(--gold);color:#3b2a00;font-weight:700;font-size:14px;padding:10px 16px;border-radius:10px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn.alt{background:rgba(255,255,255,.16);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{border-radius:14px;padding:14px;color:#fff}
+.stat small{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.9}
+.stat b{display:block;font-size:28px;line-height:1.2;margin:2px 0}
+.stat i{font-style:normal;font-size:12px;opacity:.9}
+.s1{background:#2e9e6b}.s2{background:#2f6fd6}.s3{background:#e07a1f}.s4{background:#7a45d1}
+
+/* Judul bagian */
+.sec{margin:34px 0}
+.sec h2{margin:0;font-size:22px;text-align:center;color:var(--g1)}
+.sec h2:after{content:"";display:block;width:46px;height:3px;background:var(--gold);margin:7px auto 0;border-radius:3px}
+.sec .sub{margin:6px 0 16px;text-align:center;color:var(--mute);font-size:14px}
+
+/* Profil singkat */
+.profil{display:flex;gap:16px;align-items:center;background:linear-gradient(135deg,#1c6b52,var(--g1));color:#fff;border-radius:18px;padding:20px;margin-top:26px}
+.ava{flex:none;width:84px;height:84px;border-radius:50%;background:var(--gold);color:#3b2a00;font-weight:800;font-size:28px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ava img{width:100%;height:100%;object-fit:cover}
+.profil b{display:block;font-size:19px;color:#e9ff8f}
+.profil span{font-size:14px;color:#d9efe6}
+.profil a{display:inline-block;margin-top:8px;font-size:14px;font-weight:700;color:var(--gold)}
+
+/* Menu cepat & kartu */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.menu{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;color:var(--ink);text-decoration:none}
+.menu:hover{border-color:var(--g2)}
+.menu em{flex:none;font-style:normal;font-size:22px;width:44px;height:44px;border-radius:11px;background:var(--soft);display:flex;align-items:center;justify-content:center}
+.menu b{display:block;font-size:15px;line-height:1.25}
+.menu span{font-size:12.5px;color:var(--mute)}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(15,76,58,.06)}
+.card b{display:block;font-size:16px;margin-bottom:3px}
+.card p{margin:0 0 12px;font-size:14px;color:var(--mute)}
+.tag{display:inline-block;font-size:11.5px;background:var(--soft);color:var(--g1);border-radius:6px;padding:2px 9px;margin-bottom:8px;font-weight:600}
+.link{display:inline-block;font-size:13px;font-weight:700;color:var(--g2);border:1px solid var(--g2);border-radius:8px;padding:6px 12px;text-decoration:none}
+.link:hover{background:var(--g2);color:#fff}
+.soon{display:inline-block;font-size:13px;color:var(--mute);font-style:italic}
+.kosong{text-align:center;color:var(--mute);padding:24px;background:#fff;border:1px dashed var(--line);border-radius:14px}
+
+/* Halaman dalam */
+.judul{background:var(--g1);color:#fff;padding:26px 0}
+.judul h1{margin:0;font-size:clamp(24px,5vw,32px)}
+.judul p{margin:4px 0 0;color:#d9efe6}
+.filter{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 4px}
+.filter button{font-family:inherit;font-size:14px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.filter button.aktif{background:var(--g1);color:#fff;border-color:var(--g1)}
+.kelompok{margin:22px 0 8px;font-size:17px;color:var(--g1)}
+.prosa{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:22px 0}
+.prosa p{margin:0 0 12px}
+.timeline{list-style:none;margin:0;padding:0 0 0 18px;border-left:3px solid var(--line)}
+.timeline li{position:relative;margin:0 0 16px;padding-left:14px}
+.timeline li:before{content:"";position:absolute;left:-26px;top:7px;width:13px;height:13px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 0 0 2px var(--g2)}
+.timeline b{color:var(--g1)}
+
+/* Kaki halaman */
+footer{margin-top:40px;background:#0b3a2c;color:#d9efe6;padding:24px 0;font-size:14px}
+footer b{display:block;color:#fff;font-size:16px;margin-bottom:6px}
+footer a{color:var(--gold)}
+footer small{display:block;margin-top:12px;opacity:.75}
+
+@media(min-width:640px){
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .grid.tiga{grid-template-columns:repeat(3,1fr)}
+  .grid.menu3{grid-template-columns:repeat(3,1fr)}
+  .hero{padding:50px 0 40px}
+}

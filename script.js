@@ -77,4 +77,19 @@
       }).join("");
     }
   }
+
+  // Jam dan tanggal langsung dari waktu lokal perangkat pengunjung
+  function perbaruiJam() {
+    var now = new Date();
+    var jam = document.getElementById("jam-sekarang");
+    var tanggal = document.getElementById("tanggal-sekarang");
+    if (jam) jam.textContent = new Intl.DateTimeFormat("id-ID", {
+      timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+    }).format(now);
+    if (tanggal) tanggal.textContent = new Intl.DateTimeFormat("id-ID", {
+      timeZone: "Asia/Jakarta", weekday: "short", day: "numeric", month: "short", year: "numeric"
+    }).format(now);
+  }
+  perbaruiJam();
+  if (document.getElementById("jam-sekarang")) window.setInterval(perbaruiJam, 1000);
 })();

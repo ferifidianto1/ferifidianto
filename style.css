@@ -271,6 +271,18 @@ td:first-child{font-weight:700;color:var(--hijau);width:34%}
 .kaki-menu a:hover{text-decoration:underline}
 .hak{max-width:1120px;margin:20px auto 0;padding:0 24px;font-size:13px;color:var(--mute)}
 
+
+/* ---------- Teks rata kanan-kiri untuk paragraf bacaan ---------- */
+.artikel p,.prosa p,.dalil-isi p,.butir div span,.poin li,.hikmah li,
+.kotak-krem .isi,.kotak-gelap .isi,.tentang p,.bab .isi span:last-child,
+.kartu p,.diskusi p,.diskusi-info p,.catatan,.unduh .sub,.kuis-kartu .petunjuk,
+.timeline li,.hero-kartu p,.kisah p,.judul-halaman p{
+  text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word
+}
+.kotak-gelap .kutipan,.arab,.dalil-isi .arti{text-align:left}
+.dalil-isi .arti{text-align:justify}
+.arab{text-align:right}
+
 /* ---------- Layar kecil ---------- */
 @media(max-width:899px){
   .samping{max-width:none;flex-basis:100%}
@@ -295,6 +307,15 @@ td:first-child{font-weight:700;color:var(--hijau);width:34%}
   .arab{font-size:28px}
   .dalil-kepala,.dalil-isi{padding:20px}
   .kutipan{font-size:19px}
+  /* teks rata kanan-kiri di layar sempit: huruf sedikit lebih kecil dan bingkai lebih tipis
+     supaya jarak antarkata tidak terlalu renggang */
+  .artikel{padding:20px;gap:36px}
+  .artikel p,.butir div span,.poin li,.tentang p,.prosa p,.timeline li{font-size:16px;line-height:1.75}
+  .dalil-isi p,.hikmah li,.kotak-krem .isi,.kotak-gelap .isi{font-size:15.5px;line-height:1.7}
+  .kotak-krem,.kotak-gelap{padding:18px 16px}
+  .dalil-kepala,.dalil-isi{padding:18px 16px}
+  .hikmah{padding:16px}
+  .kutipan{font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

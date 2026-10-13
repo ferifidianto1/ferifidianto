@@ -46,3 +46,24 @@ pertanyaan lewat surel.
 
 Ganti file PDF dengan nama yang sama, atau ganti nama file di `data.js` (baris `pdf`)
 dan di tombol unduh pada halaman bab.
+
+## Agar situs ditemukan di Google
+
+Situs baru tidak langsung muncul di Google. Biasanya butuh beberapa hari sampai beberapa minggu,
+dan lebih cepat kalau didaftarkan lewat Google Search Console.
+
+1. Buka https://search.google.com/search-console dan masuk dengan akun Google yang sama dengan
+   yang dipakai saat verifikasi (berkas `google7f41c135078191eb.html` jangan dihapus).
+2. Pastikan propertinya bertipe **Awalan URL** dengan alamat
+   `https://ferifidianto1.github.io/ferifidianto/` (pakai garis miring di akhir).
+3. Menu **Sitemap**: tulis `sitemap.xml` di kolom, lalu **Kirim**. Statusnya harus "Berhasil".
+4. Menu **Pemeriksaan URL**: tempel alamat beranda, lalu klik **Minta pengindeksan**.
+   Ulangi untuk `materi.html`, `bab-1-istiqomah.html`, `perangkat.html`, dan `profil.html`.
+5. Cek hasilnya dengan mengetik `site:ferifidianto1.github.io` di Google.
+   Kalau sudah ada hasilnya, berarti situs sudah terindeks.
+
+Setiap menambah bab baru: tambahkan alamatnya di `sitemap.xml` (salin satu blok `<url>`),
+lalu lakukan langkah 4 untuk halaman barunya.
+
+Tips agar lebih cepat dikenal: tautkan situs ini dari situs atau media sosial madrasah,
+grup WhatsApp guru, dan profil akun lain milik Bapak.

@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -8,10 +7,12 @@
     <loc>https://ferifidianto1.github.io/ferifidianto/materi.html</loc>
   </url>
   <url>
+    <loc>https://ferifidianto1.github.io/ferifidianto/bab-1-istiqomah.html</loc>
+  </url>
+  <url>
     <loc>https://ferifidianto1.github.io/ferifidianto/perangkat.html</loc>
   </url>
   <url>
     <loc>https://ferifidianto1.github.io/ferifidianto/profil.html</loc>
   </url>
 </urlset>
-  

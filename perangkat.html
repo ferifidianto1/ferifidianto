@@ -3,64 +3,65 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0A2F25">
 <title>Perangkat Ajar · Ruang Akidah Akhlak Feri Fidianto</title>
 <meta name="description" content="Perangkat ajar Akidah Akhlak: modul ajar, ATP, silabus, soal, dan media belajar.">
-<link rel="stylesheet" href="style.css?v=20261013b">
+<link rel="canonical" href="https://ferifidianto1.github.io/ferifidianto/perangkat.html">
+<link rel="icon" type="image/png" href="gambar/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261013c">
 </head>
 <body>
 
+<a class="lompat" href="#isi">Lewati ke isi halaman</a>
+
+<div class="infobar"><div class="wrap">
+  <span><b id="sapaan">Selamat datang</b> · <span id="tanggal">Memuat tanggal…</span></span>
+  <span class="jam" id="jam" aria-label="Jam sekarang">--:--:--</span>
+</div></div>
+
 <header class="top"><div class="wrap">
-  <a class="brand" href="index.html">Ruang Akidah Akhlak<small>Feri Fidianto · MTsN 2 Grobogan</small></a>
-  <div class="top-right">
-    <div class="datetime" aria-label="Tanggal dan waktu saat ini"><span class="clock-icon">◷</span><div><strong id="jam-sekarang">--:--:--</strong><small id="tanggal-sekarang">Memuat tanggal…</small></div></div>
-    <nav>
+  <a class="brand" href="index.html"><img src="gambar/logo.png" alt="Logo Ruang Akidah Akhlak" width="52" height="52"><span>Ruang Akidah Akhlak<small>Feri Fidianto · MTsN 2 Grobogan</small></span></a>
+  <nav aria-label="Menu utama">
     <a href="index.html">Beranda</a>
     <a href="materi.html">Materi</a>
     <a href="perangkat.html">Perangkat Ajar</a>
     <a href="profil.html">Profil</a>
-    </nav>
-  </div>
+  </nav>
 </div></header>
 
-<section class="judul"><div class="wrap">
+<section class="judul-halaman"><div class="wrap">
   <h1>Perangkat Ajar</h1>
   <p>Modul ajar, ATP, silabus, soal, dan media belajar.</p>
 </div></section>
 
-<main class="wrap">
+<main class="isi-halaman" id="isi"><div class="wrap">
   <div id="daftar-perangkat"></div>
-</main>
+</div></main>
 
-<footer><div class="wrap">
-  <b>Ruang Akidah Akhlak Feri Fidianto</b>
-  MTsN 2 Grobogan, Kabupaten Grobogan, Jawa Tengah<br>
-  Surel: ferifidiantonew@gmail.com<br>
-  <a href="index.html">Beranda</a> · <a href="materi.html">Materi</a> · <a href="perangkat.html">Perangkat Ajar</a> · <a href="profil.html">Profil</a>
-  <small>© <span id="tahun">2026</span> Feri Fidianto, S.Pd. Seluruh materi untuk kepentingan pembelajaran.</small>
-</div></footer>
+<footer class="kaki">
+  <div class="wrap">
+    <div class="kaki-kiri">
+      <img src="gambar/logo.png" alt="" width="56" height="56">
+      <div>
+        <b>Feri Fidianto, S.Pd.</b>
+        <span>Guru Akidah Akhlak · MTsN 2 Grobogan, Kabupaten Grobogan, Jawa Tengah</span>
+        <span>Surel: <a href="mailto:ferifidiantonew@gmail.com">ferifidiantonew@gmail.com</a></span>
+      </div>
+    </div>
+    <div class="kaki-menu">
+      <a href="index.html">Beranda</a>
+      <a href="materi.html">Materi</a>
+      <a href="perangkat.html">Perangkat Ajar</a>
+      <a href="profil.html">Profil</a>
+    </div>
+  </div>
+  <p class="hak">© <span id="tahun">2026</span> Feri Fidianto, S.Pd. Seluruh materi untuk kepentingan pembelajaran.</p>
+</footer>
 
-<script src="data.js?v=20261013b"></script>
-<script src="script.js?v=20261013b"></script>
-<script>
-(function () {
-  function updateClock() {
-    var now = new Date();
-    var clock = document.getElementById("jam-sekarang");
-    var date = document.getElementById("tanggal-sekarang");
-    try {
-      var opts = { timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false };
-      var timeText = new Intl.DateTimeFormat("id-ID", opts).format(now);
-      var dateText = new Intl.DateTimeFormat("id-ID", { timeZone: "Asia/Jakarta", weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(now);
-      if (clock) clock.textContent = timeText;
-      if (date) date.textContent = dateText;
-    } catch (e) {
-      if (clock) clock.textContent = now.toLocaleTimeString("id-ID");
-      if (date) date.textContent = now.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-    }
-  }
-  updateClock();
-  window.setInterval(updateClock, 1000);
-})();
-</script>
+<script src="data.js?v=20261013c"></script>
+<script src="script.js?v=20261013c"></script>
 </body>
 </html>

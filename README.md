@@ -14,7 +14,7 @@ Situs statis untuk GitHub Pages: https://ferifidianto1.github.io/ferifidianto/
 | `data.js` | Daftar materi, perangkat ajar, dan pengaturan kolom diskusi |
 | `style.css` | Warna dan tampilan (warna ada di bagian `:root`) |
 | `script.js` | Jam, daftar, latihan soal, kolom diskusi (biasanya tidak diubah) |
-| `gambar/` | Logo dan foto |
+| `logo.png`, `logo-besar.png`, `favicon.png`, `foto-feri.jpg` | Logo dan foto (satu folder dengan file HTML) |
 
 ## Menambah bab baru
 

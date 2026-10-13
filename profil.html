@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Profil · Ruang Akidah Akhlak Feri Fidianto</title>
 <meta name="description" content="Profil Feri Fidianto, S.Pd., guru Akidah Akhlak MTsN 2 Grobogan.">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20261013b">
 </head>
 <body>
 
@@ -69,6 +69,27 @@
   <small>© <span id="tahun">2026</span> Feri Fidianto, S.Pd. Seluruh materi untuk kepentingan pembelajaran.</small>
 </div></footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=20261013b"></script>
+<script>
+(function () {
+  function updateClock() {
+    var now = new Date();
+    var clock = document.getElementById("jam-sekarang");
+    var date = document.getElementById("tanggal-sekarang");
+    try {
+      var opts = { timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false };
+      var timeText = new Intl.DateTimeFormat("id-ID", opts).format(now);
+      var dateText = new Intl.DateTimeFormat("id-ID", { timeZone: "Asia/Jakarta", weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(now);
+      if (clock) clock.textContent = timeText;
+      if (date) date.textContent = dateText;
+    } catch (e) {
+      if (clock) clock.textContent = now.toLocaleTimeString("id-ID");
+      if (date) date.textContent = now.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+    }
+  }
+  updateClock();
+  window.setInterval(updateClock, 1000);
+})();
+</script>
 </body>
 </html>

@@ -127,10 +127,15 @@
       PERANGKAT.forEach(function (p) { if (jenis.indexOf(p.jenis) < 0) jenis.push(p.jenis); });
       per.innerHTML = jenis.map(function (jn) {
         var isi = PERANGKAT.filter(function (p) { return p.jenis === jn; }).map(function (p) {
-          var aksi = ada(p.tautan)
-            ? '<a class="btn kecil gelap" ' + atributTautan(p.tautan) + '>Unduh / buka</a>'
-            : '<span class="label-segera">Segera hadir</span>';
-          return '<div class="kartu"><b>' + esc(p.nama) + '</b><div class="aksi">' + aksi + '</div></div>';
+          var aksi = "";
+          if (ada(p.pdf)) aksi += '<a class="btn kecil gelap" href="' + esc(p.pdf) + '" download>Unduh PDF</a>';
+          if (p.word) {
+            var sub = "Permintaan file Word: " + p.nama;
+            var isiSurel = "Assalamualaikum Pak Feri,\n\nSaya ingin meminta file Word berikut:\n" + p.nama + "\n(" + p.word + ")\n\nNama:\nAsal madrasah/sekolah:\nKeperluan:\n\nTerima kasih.";
+            aksi += '<a class="btn kecil garis-gelap" href="mailto:ferifidiantonew@gmail.com?subject=' + encodeURIComponent(sub) + '&body=' + encodeURIComponent(isiSurel) + '">Minta file Word</a>';
+          }
+          if (!aksi) aksi = '<span class="label-segera">Segera hadir</span>';
+          return '<div class="kartu"><b>' + esc(p.nama) + '</b>' + (p.ringkas ? '<p>' + esc(p.ringkas) + '</p>' : '') + '<div class="aksi">' + aksi + '</div></div>';
         }).join("");
         return '<h2 class="kelompok">' + esc(jn) + '</h2><div class="grid">' + isi + '</div>';
       }).join("");

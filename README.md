@@ -67,3 +67,11 @@ lalu lakukan langkah 4 untuk halaman barunya.
 
 Tips agar lebih cepat dikenal: tautkan situs ini dari situs atau media sosial madrasah,
 grup WhatsApp guru, dan profil akun lain milik Bapak.
+
+## Perangkat ajar (PDF umum, Word lewat surel)
+
+- File PDF ada di folder `perangkat/`. Daftarnya ada di `data.js` bagian `PERANGKAT`.
+- File Word **tidak** diunggah ke situs. Tombol "Minta file Word" membuka surel ke Bapak;
+  Bapak membalas dengan file Word dari folder `Word-untuk-guru` (simpan di komputer Bapak).
+- Menambah perangkat baru: tambahkan PDF-nya ke folder `perangkat/`, lalu salin satu baris
+  di `PERANGKAT` dan ganti isinya.

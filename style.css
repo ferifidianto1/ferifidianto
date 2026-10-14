@@ -320,3 +320,7 @@ td:first-child{font-weight:700;color:var(--hijau);width:34%}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
+
+.aturan{background:#FFF3D6;border:2px solid #FFB020;border-radius:16px;padding:20px 24px;margin:0 0 28px}
+.aturan h2{margin:0 0 10px;font-size:20px;font-weight:800;color:#0A2F25}
+.aturan ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.65}

@@ -70,8 +70,15 @@ grup WhatsApp guru, dan profil akun lain milik Bapak.
 
 ## Perangkat ajar (PDF umum, Word lewat surel)
 
-- File PDF ada di folder `perangkat/`. Daftarnya ada di `data.js` bagian `PERANGKAT`.
+- File PDF ada di folder utama (satu tempat dengan index.html). Daftarnya ada di `data.js` bagian `PERANGKAT`.
 - File Word **tidak** diunggah ke situs. Tombol "Minta file Word" membuka surel ke Bapak;
   Bapak membalas dengan file Word dari folder `Word-untuk-guru` (simpan di komputer Bapak).
-- Menambah perangkat baru: tambahkan PDF-nya ke folder `perangkat/`, lalu salin satu baris
+- Menambah perangkat baru: tambahkan PDF-nya ke folder utama, lalu salin satu baris
   di `PERANGKAT` dan ganti isinya.
+
+## Halaman perangkat ajar dan bagian "Terbaru"
+
+- Setiap perangkat punya halaman sendiri (isi, tombol Unduh PDF, Minta file Word, diskusi).
+  Halaman itu dibuat dari file Word-nya; kalau Bapak mengubah isi perangkat, kabari saya untuk dibuatkan ulang.
+- Bagian **Terbaru** di beranda otomatis mengambil dari `data.js`: `MATERI`, `PERANGKAT`, dan `BERITA`.
+  Untuk menambah berita atau makalah, tambahkan satu baris di `BERITA` (judul, ringkas, tanggal, tautan).

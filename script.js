@@ -43,6 +43,7 @@
   /* ---------- Menu aktif ---------- */
   var here = location.pathname.split("/").pop() || "index.html";
   if (here.indexOf("bab-") === 0) here = "materi.html";
+  if (document.body && document.body.getAttribute("data-menu")) here = document.body.getAttribute("data-menu");
   var links = document.querySelectorAll("nav a");
   for (var i = 0; i < links.length; i++) {
     if (links[i].getAttribute("href") === here) links[i].setAttribute("aria-current", "page");
@@ -117,7 +118,7 @@
     }
   }
 
-  /* ---------- Halaman Perangkat Ajar ---------- */
+  /* ---------- Halaman Perangkat Ajar (kartu + pencarian) ---------- */
   var per = document.getElementById("daftar-perangkat");
   if (per && typeof PERANGKAT !== "undefined") {
     if (!PERANGKAT.length) {
@@ -127,19 +128,67 @@
       PERANGKAT.forEach(function (p) { if (jenis.indexOf(p.jenis) < 0) jenis.push(p.jenis); });
       per.innerHTML = jenis.map(function (jn) {
         var isi = PERANGKAT.filter(function (p) { return p.jenis === jn; }).map(function (p) {
-          var aksi = "";
-          if (ada(p.pdf)) aksi += '<a class="btn kecil gelap" href="' + esc(p.pdf) + '" download>Unduh PDF</a>';
-          if (p.word) {
-            var sub = "Permintaan file Word: " + p.nama;
-            var isiSurel = "Assalamualaikum Pak Feri,\n\nSaya ingin meminta file Word berikut:\n" + p.nama + "\n(" + p.word + ")\n\nNama:\nAsal madrasah/sekolah:\nKeperluan:\n\nTerima kasih.";
-            aksi += '<a class="btn kecil garis-gelap" href="mailto:ferifidiantonew@gmail.com?subject=' + encodeURIComponent(sub) + '&body=' + encodeURIComponent(isiSurel) + '">Minta file Word</a>';
-          }
-          if (!aksi) aksi = '<span class="label-segera">Segera hadir</span>';
-          return '<div class="kartu"><b>' + esc(p.nama) + '</b>' + (p.ringkas ? '<p>' + esc(p.ringkas) + '</p>' : '') + '<div class="aksi">' + aksi + '</div></div>';
+          var aksi = ada(p.tautan)
+            ? '<a class="btn kecil gelap" href="' + esc(p.tautan) + '">Lihat perangkat</a>'
+            : '<span class="label-segera">Segera hadir</span>';
+          return '<div class="kartu" data-cari="' + esc((p.nama + " " + p.jenis + " " + (p.ringkas || "")).toLowerCase()) + '"><b>' + esc(p.nama) + '</b>' + (p.ringkas ? '<p>' + esc(p.ringkas) + '</p>' : '') + '<div class="aksi">' + aksi + '</div></div>';
         }).join("");
-        return '<h2 class="kelompok">' + esc(jn) + '</h2><div class="grid">' + isi + '</div>';
-      }).join("");
+        return '<section class="kelompok-perangkat"><h2 class="kelompok">' + esc(jn) + '</h2><div class="grid">' + isi + '</div></section>';
+      }).join("") + '<div class="kosong" id="cari-kosong" hidden>Tidak ada perangkat yang cocok. Coba kata lain, misalnya "LKPD" atau "Bab 3".</div>';
+      var cari = document.getElementById("cari-perangkat");
+      if (cari) {
+        cari.addEventListener("input", function () {
+          var q = cari.value.trim().toLowerCase(), total = 0;
+          Array.prototype.forEach.call(per.querySelectorAll(".kelompok-perangkat"), function (sec) {
+            var tampak = 0;
+            Array.prototype.forEach.call(sec.querySelectorAll(".kartu"), function (k) {
+              var cocok = !q || k.getAttribute("data-cari").indexOf(q) >= 0;
+              k.hidden = !cocok; if (cocok) tampak++;
+            });
+            sec.hidden = tampak === 0; total += tampak;
+          });
+          var kos = document.getElementById("cari-kosong"); if (kos) kos.hidden = total !== 0;
+        });
+      }
     }
+  }
+
+  /* ---------- Bagian Terbaru di beranda ---------- */
+  var terbaru = document.getElementById("daftar-terbaru");
+  if (terbaru) {
+    var semua = [];
+    function ambil(arr, jenis, label, n, peta) {
+      (arr || []).slice().sort(function (x, y) { return String(y.tanggal || "").localeCompare(String(x.tanggal || "")); })
+        .slice(0, n).forEach(function (x) { semua.push(peta(x, jenis, label)); });
+    }
+    ambil(typeof MATERI !== "undefined" ? MATERI : [], "materi", "Materi", 3, function (x, j, l) {
+      return { j: j, label: l + " · Kelas " + x.kelas + " · Bab " + x.bab, judul: x.judul, ringkas: x.ringkas, tanggal: x.tanggal || "", tautan: x.tautan };
+    });
+    ambil(typeof PERANGKAT !== "undefined" ? PERANGKAT : [], "perangkat", "Perangkat", 3, function (x, j, l) {
+      return { j: j, label: l + " · " + x.jenis, judul: x.nama, ringkas: x.ringkas, tanggal: x.tanggal || "", tautan: x.tautan };
+    });
+    ambil(typeof BERITA !== "undefined" ? BERITA : [], "berita", "", 4, function (x, j) {
+      return { j: j, label: x.jenis || "Berita", judul: x.judul, ringkas: x.ringkas, tanggal: x.tanggal || "", tautan: x.tautan };
+    });
+    var BLN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+    function fmtTgl(t) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(t); return m ? parseInt(m[3], 10) + " " + BLN[parseInt(m[2], 10) - 1] + " " + m[1] : ""; }
+    function gambar(filter) {
+      var daftar = semua.filter(function (x) { return filter === "semua" || x.j === filter; })
+        .sort(function (x, y) { return y.tanggal.localeCompare(x.tanggal); }).slice(0, 6);
+      terbaru.innerHTML = daftar.length ? daftar.map(function (x) {
+        var buka = ada(x.tautan) ? '<a class="link-bawah" ' + atributTautan(x.tautan) + '>Baca selengkapnya</a>' : '<span class="label-segera">Segera</span>';
+        return '<article class="kabar kabar-' + x.j + '"><div class="kabar-meta"><span class="kabar-label">' + esc(x.label) + '</span><time>' + esc(fmtTgl(x.tanggal)) + '</time></div><h3>' + esc(x.judul) + '</h3><p>' + esc(x.ringkas || "") + '</p>' + buka + '</article>';
+      }).join("") : '<div class="kosong">Belum ada yang terbaru di kategori ini.</div>';
+      tandaiMuncul();
+    }
+    var tab = document.querySelectorAll("[data-tab-terbaru]");
+    Array.prototype.forEach.call(tab, function (t) {
+      t.addEventListener("click", function () {
+        Array.prototype.forEach.call(tab, function (o) { o.setAttribute("aria-pressed", "false"); o.classList.remove("aktif"); });
+        t.setAttribute("aria-pressed", "true"); t.classList.add("aktif"); gambar(t.getAttribute("data-tab-terbaru"));
+      });
+    });
+    window.setTimeout(function () { gambar("semua"); }, 0);
   }
 
   /* ---------- Daftar isi halaman bab: tertutup di layar kecil ---------- */
@@ -225,4 +274,44 @@
     var info = document.getElementById("diskusi-belum-aktif");
     if (info) info.style.display = "none";
   }
+  /* ---------- Interaksi: muncul saat digulir, progres baca, tombol ke atas ---------- */
+  var kurangGerak = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var pengamat = null;
+  function tandaiMuncul() {
+    var el = document.querySelectorAll(".kartu, .kabar, .bab, .jalur, .kisah, .tentang, .berkas, .unduh, .diskusi, .kuis-kartu");
+    Array.prototype.forEach.call(el, function (e) {
+      if (e.getAttribute("data-m")) return;
+      e.setAttribute("data-m", "1");
+      if (kurangGerak || !("IntersectionObserver" in window)) return;
+      e.classList.add("siap-muncul");
+      if (!pengamat) {
+        pengamat = new IntersectionObserver(function (items) {
+          items.forEach(function (it) { if (it.isIntersecting) { it.target.classList.add("tampak"); pengamat.unobserve(it.target); } });
+        }, { threshold: 0.08 });
+      }
+      pengamat.observe(e);
+    });
+  }
+  tandaiMuncul();
+
+  var artikel = document.querySelector(".artikel");
+  var bar = null;
+  if (artikel) {
+    bar = document.createElement("div"); bar.className = "progres-baca"; bar.setAttribute("aria-hidden", "true");
+    bar.innerHTML = "<span></span>"; document.body.appendChild(bar);
+  }
+  var atas = document.createElement("button");
+  atas.type = "button"; atas.className = "ke-atas"; atas.setAttribute("aria-label", "Kembali ke atas"); atas.innerHTML = "&#8593;";
+  document.body.appendChild(atas);
+  atas.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: kurangGerak ? "auto" : "smooth" }); });
+  function saatGulir() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    atas.classList.toggle("tampak", y > 500);
+    if (bar && artikel) {
+      var r = artikel.getBoundingClientRect(), tinggi = artikel.offsetHeight - window.innerHeight * 0.6;
+      var p = tinggi > 0 ? Math.min(1, Math.max(0, -r.top / tinggi)) : 0;
+      bar.firstChild.style.width = (p * 100).toFixed(1) + "%";
+    }
+  }
+  window.addEventListener("scroll", saatGulir, { passive: true }); saatGulir();
 })();
